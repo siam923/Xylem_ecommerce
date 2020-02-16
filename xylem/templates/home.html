@@ -1,0 +1,29 @@
+{% extends '_base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+<h2>Homepage</h2>
+
+{% if user.is_authenticated %}
+  <h4>Hi {{ user.email }}!</h4>
+  <p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+<p class="lead">
+  If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>.
+  </p>
+  <p>If you are new here, get started
+  by creating a <a href="{% url 'signup_customer' %}">customer account</a> or a <a href="{% url 'signup_vendor' %}">vendor account</a>.
+</p>
+<hr>
+<h3>What's this about?</h3>
+<p>
+  This will become a multivendor e-commerce site in the near futere :v
+</p>
+{% endblock %}
