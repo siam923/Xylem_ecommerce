@@ -23,6 +23,7 @@ class CustomerSignUpForm(UserCreationForm):
         user = super().save(commit=False)
         user.is_customer = True
         user.save()
+        gender = self.cleaned_data.get('gender')
         customer = Customer.objects.create(user=user, gender=gender)
         return user
 
@@ -40,7 +41,7 @@ class VendorSignUpForm(UserCreationForm):
         user.is_vendor = True
 
         user.save()
-        address = self.cleaned_data.get('address')
+        shop = self.cleaned_data.get('shop')
         customer = Vendor.objects.create(user=user, shop=shop)
 
         return user

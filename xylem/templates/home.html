@@ -1,22 +1,23 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock title %}
 
 
 {% block content %}
-<h2>Homepage</h2>
+<h1>Homepage</h1>
 
 {% if user.is_authenticated %}
   <h4>Hi {{ user.email }}!</h4>
-  <p><a href="{% url 'logout' %}">Log Out</a></p>
+  <p><a href="{% url 'account_logout' %}">Log Out</a></p>
 {% else %}
   <p>You are not logged in</p>
-  <a href="{% url 'login' %}">Log In</a>
-  <a href="{% url 'signup' %}">Sign Up</a>
+  <a href="{% url 'account_login' %}">Log In</a>
+  <a href="{% url 'account_signup' %}">Sign Up</a>
 {% endif %}
 
 <p class="lead">
-  If you already have an account, go ahead and <a href="{% url 'login' %}">log in</a>.
+  If you already have an account, go ahead and <a href="{% url 'account_login' %}">log in</a>.
   </p>
   <p>If you are new here, get started
   by creating a <a href="{% url 'signup_customer' %}">customer account</a> or a <a href="{% url 'signup_vendor' %}">vendor account</a>.
@@ -26,4 +27,5 @@
 <p>
   This will become a multivendor e-commerce site in the near futere :v
 </p>
+<img class="demo img-thumbnail" src="{% static 'images/home.jpg' %}">
 {% endblock %}

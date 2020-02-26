@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+
+<p> Account successfully created. </p>
+<a href="{% url 'account_login' %}">Login</a>
+
+{% endblock %}
