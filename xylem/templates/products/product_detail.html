@@ -4,8 +4,21 @@
 
 {% block content %}
   <div class="book-detail">
+    {% if product.product_cover %}
+      <img class="demo" src="{{ product.product_cover.url}}" alt="{{ product.name }}">
+    {% endif %}
     <h2><a href="">{{ product.name }}</a></h2>
     <p>Category: {{ product.category }}</p>
     <p>Price: {{ product.price }}</p>
+
+    <div>
+      <h3>Reviews</h3>
+      <ul>
+      {% for review in product.reviews.all %}
+      <li>{{ review.review }} ({{ review.user }})</li>
+      {% endfor %}
+      </ul>
+    </div>
+
   </div>
 {% endblock content %}
