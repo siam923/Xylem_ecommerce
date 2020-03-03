@@ -19,13 +19,20 @@
 <p class="lead">
   If you already have an account, go ahead and <a href="{% url 'account_login' %}">log in</a>.
   </p>
-  <p>If you are new here, get started
-  by creating a <a href="{% url 'signup_customer' %}">customer account</a> or a <a href="{% url 'signup_vendor' %}">vendor account</a>.
-</p>
+
 <hr>
 <h3>What's this about?</h3>
 <p>
   This will become a multivendor e-commerce site in the near futere :v
 </p>
+
+{% if user.is_authenticated %}
+  <p>Apply For Vendor Account <a href="{% url 'vendor_create' %}">here</a>.</p>
+  <p>View my profile <a href="{% url 'profile_detail' user.pk %}">here</a>.</p>
+  {% if user.is_vendor %}
+    <p>Add new product <a href="{% url 'product_create' %}">here</a>.</p>
+  {% endif %}
+{% endif %}
+
 <img class="demo img-thumbnail" src="{% static 'images/home.jpg' %}">
 {% endblock %}

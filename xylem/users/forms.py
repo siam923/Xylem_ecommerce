@@ -1,47 +1,34 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from django.db import transaction # allows to save additional info-> see doc
+#from django.db import transaction # allows to save additional info-> see doc
 # Importing users
 from django.contrib.auth import get_user_model
-from .models import (Vendor, Customer)
+#from .models import (Vendor, Customer)
+from allauth.account.forms import SignupForm
 
 
-class CustomerSignUpForm(UserCreationForm):
+class MyCustomSignupForm(SignupForm): 
     GENDER_CHOICES = (
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    gender = forms.ChoiceField(required=True, label='Sex', choices=GENDER_CHOICES)
+    gender = forms.ChoiceField(choices=GENDER_CHOICES)
+    address = forms.CharField(max_length=255, label='Address')
+    first_name = forms.CharField(max_length=20, label='First Name')
+    last_name = forms.CharField(max_length=20, label='Last Name')
 
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ('email', 'address', 'first_name', 'last_name')
+    def save(self, request):
 
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_customer = True
+        # Ensure you call the parent class's save.
+        # .save() returns a User object.
+        user = super(MyCustomSignupForm, self).save(request)
+
+        # Add your own processing here.
+        user.gender = self.cleaned_data['gender']
+        user.address = self.cleaned_data['address']
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
         user.save()
-        gender = self.cleaned_data.get('gender')
-        customer = Customer.objects.create(user=user, gender=gender)
-        return user
-
-
-class VendorSignUpForm(UserCreationForm):
-    shop = forms.CharField(label='Shop Name')
-
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        fields = UserCreationForm.Meta.fields + ('email', 'address', 'first_name', 'last_name')
-
-    @transaction.atomic
-    def save(self):
-        user = super().save(commit=False)
-        user.is_vendor = True
-
-        user.save()
-        shop = self.cleaned_data.get('shop')
-        customer = Vendor.objects.create(user=user, shop=shop)
-
+        # You must return the original result.
         return user

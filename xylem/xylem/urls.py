@@ -9,10 +9,10 @@ urlpatterns = [
 
     # User Management
     path('accounts/', include('allauth.urls')),
-    path('accounts/', include('users.urls')),
 
     # Local apps
     path('', include('pages.urls')),
     path('products/', include('products.urls')),
+    path('profile/', include('users.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

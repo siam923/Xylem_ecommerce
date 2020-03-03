@@ -9,15 +9,18 @@
     {% endif %}
     <h2><a href="">{{ product.name }}</a></h2>
     <p>Category: {{ product.category }}</p>
+    <p>Brand: {{product.vendor.brand}}</p>
     <p>Price: {{ product.price }}</p>
+
+    <p><a href="{% url 'review_create' product.id %}">Drop Review</a></p>
 
     <div>
       <h3>Reviews</h3>
-      <ul>
+      <ol>
       {% for review in product.reviews.all %}
-      <li>{{ review.review }} ({{ review.user }})</li>
+      <li>{{ review.review }} by ({{ review.user }})</li>
       {% endfor %}
-      </ul>
+      </ol>
     </div>
 
   </div>

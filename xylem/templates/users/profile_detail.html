@@ -1,0 +1,23 @@
+{% extends '_base.html' %}
+
+{% block title %}Vendor Profile Creatiion{% endblock title %}
+
+{% block content %}
+  <h1>My Profie</h1>
+  <hr>
+  <h2> User Info </h2>
+  <p>User Name: {{custom_user.username}}</p>
+  <p>First Name: {{custom_user.first_name }}</p>
+  <p>Last Name: {{custom_user.last_name}}</p>
+  <p>Email: {{custom_user.email}}</p>
+  <hr>
+
+  {% if flag %}
+    <h2> Vendor Information </h2>
+    <p>Brand Name: {{brand_name}}</p>
+    <p>Brand Info: {{brand_info}}</p>
+    <p><a href="">Edit Vendor Profile</a></p>
+  <h2>
+  {% endif %}
+
+{% endblock content %}

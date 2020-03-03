@@ -1,45 +1,46 @@
 from django.shortcuts import render, redirect
 
-from .forms import CustomerSignUpForm, VendorSignUpForm
-from .models import Customer, Vendor, CustomUser
-#from django.contrib.auth import login
-
+from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
-from django.views import generic
+from .models import VendorProfile
+from users.models import CustomUser, VendorProfile
 
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 
-# class SignUpView(generic.TemplateView):
-#     template_name = 'account/signup.html'
-
-
-class SuccessView(generic.TemplateView):
-    template_name = 'signup_success.html'
-
-
-class CustomerSignUpView(generic.CreateView):
-    model = CustomUser
-    form_class = CustomerSignUpForm
-    template_name = 'registration/customer_signup.html'
-
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'Customer'
-        return super().get_context_data(**kwargs)
+class VendorCreateView(LoginRequiredMixin, CreateView):
+    model = VendorProfile
+    template_name = 'users/vendor_create.html'
+    fields = ('brand', 'info',)
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        user = form.save()
-        #login(self.request, user)
-        return redirect('signup_success')
+        user = self.request.user
+        user_info = CustomUser.objects.get(id=user.id)
+        user_info.is_vendor = True
+        user_info.save()
+        form.instance.user = user
+        return super().form_valid(form)
 
-class VendorSignUpView(generic.CreateView):
+# class VendorDetailView(DetailView):
+#     model = VendorProfile
+#     template_name = 'users/vendor_detail.html'
+
+
+
+class ProfileView(LoginRequiredMixin, DetailView):
     model = CustomUser
-    form_class = VendorSignUpForm
-    template_name = 'registration/vendor_signup.html'
+    context_object_name = 'custom_user'
+    template_name = 'users/profile_detail.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'Vendor'
-        return super().get_context_data(**kwargs)
-
-    def form_valid(self, form):
-        user = form.save()
-        #login(self.request, user)
-        return redirect('signup_success')
+        context = super(ProfileView, self).get_context_data(**kwargs)
+        user = self.request.user
+        flag = user.is_vendor
+        context['flag'] = flag
+        if flag:
+            vendor = VendorProfile.objects.get(user=user.pk)
+            context['brand_name'] = vendor.brand
+            context['brand_info'] = vendor.info
+        return context

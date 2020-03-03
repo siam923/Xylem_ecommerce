@@ -3,6 +3,8 @@ from django.db import models
 from django.urls import reverse
 from django.contrib.auth import get_user_model
 
+from users.models import VendorProfile
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -12,6 +14,11 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    vendor = models.ForeignKey(
+        VendorProfile,
+        on_delete=models.CASCADE,
+        default=None
+    )
     id = models.UUIDField(
             primary_key=True,
             default=uuid.uuid4,
@@ -23,11 +30,11 @@ class Product(models.Model):
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE
-    )
+    ) # my_note: this can be manytomany ->will update later
     product_cover = models.ImageField(upload_to='product_covers/', blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} by {self.vendor.brand}"
 
     def get_absolute_url(self):
         return reverse('product_detail', args=[str(self.id)])
@@ -46,4 +53,4 @@ class Review(models.Model):
     )
 
     def __str__(self):
-        return self.review
+        return f"{self.user.username}:{self.review}" 

@@ -1,11 +1,9 @@
-from django.urls import include, path
+from django.urls import path
 
-from .views import (CustomerSignUpView, VendorSignUpView, SuccessView)
+from .views import VendorCreateView, ProfileView
 
 
 urlpatterns = [
-    #path('signup/', SignUpView.as_view(), name='signup'),
-    path('signup/customer', CustomerSignUpView.as_view(), name='signup_customer'),
-    path('signup/vendor', VendorSignUpView.as_view(), name='signup_vendor'),
-    path('signup/success', SuccessView.as_view(), name='signup_success')
+    path('vendor/create', VendorCreateView.as_view(), name='vendor_create'),
+    path('<int:pk>/', ProfileView.as_view(), name='profile_detail'),
 ]

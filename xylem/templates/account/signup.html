@@ -1,8 +1,13 @@
 {% extends '_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Sign Up{% endblock title %}
 
 {% block content %}
-  <h2>Sign up for a free account</h2>
-  <p class="lead">Select below the type of account you want to create</p>
-  <a href="{% url "signup_customer" %}" class="btn btn-lg" role="button">Customer</a>
-  <a href="{% url "signup_vendor" %}" class="btn btn-teacher btn-lg" role="button">Vendor</a>
-{% endblock %}
+<h2>Sign Up</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form|crispy }}
+  <button class="btn btn-success" type="submit">Sign Up</button>
+</form>
+{% endblock content %}
