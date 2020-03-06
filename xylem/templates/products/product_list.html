@@ -1,11 +1,26 @@
+
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}Products{% endblock title %}
 
 {% block content %}
-{% for product in product_list %}
-  <div>
-    <h2><a href="{{ product.get_absolute_url }}">{{forloop.counter}}. {{ product.name }}</a></h2>
-  </div>
-{% endfor %}
+
+  <div class="row">
+      {% for product in product_list %}
+      <div class="col-md-4 col-sm-6 col-lg-3 m-1">
+              <div class="card" style="width:auto; height:400px;">
+                <img src="{{ product.product_cover.url }}" style="width:auto; height:250px;" class="card-img-top plist" alt="{{ product.name }}">
+                      <div class="card-body">
+                        <h6 class="card-title"> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+                        <p class="card-text">{{ product.price }}</p>
+                      </div>
+                  <div class='card-footer text-center'>
+                  <p><a href="{% url 'cart' product.slug %}" class="btn btn-success">Add to Cart</a></p>
+                  <p><a href="{% url 'remove-cart' product.slug %}" class="btn btn-success">Remove From Cart</a></p>
+                  </div>
+               </div>
+        </div>
+      {% endfor %}
+</div>
 {% endblock content %}

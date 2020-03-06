@@ -5,6 +5,9 @@ from django.contrib.auth import get_user_model
 
 from users.models import VendorProfile
 
+from django.db.models.signals import pre_save, post_save
+from .utils import unique_slug_generator
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -32,6 +35,7 @@ class Product(models.Model):
         on_delete=models.CASCADE
     ) # my_note: this can be manytomany ->will update later
     product_cover = models.ImageField(upload_to='product_covers/', blank=True)
+    slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self):
         return f"{self.name} by {self.vendor.brand}"
@@ -39,7 +43,14 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', args=[str(self.id)])
 
+# Slug generator signal
+def product_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
 
+pre_save.connect(product_pre_save_receiver, sender=Product)
+
+# Review Model
 class Review(models.Model):
     product = models.ForeignKey(
         Product,
@@ -53,4 +64,4 @@ class Review(models.Model):
     )
 
     def __str__(self):
-        return f"{self.user.username}:{self.review}" 
+        return f"{self.user.username}:{self.review}"

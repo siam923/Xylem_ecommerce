@@ -1,9 +1,10 @@
 {% extends '_base.html' %}
+{% load static %}
 
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block content %}
-  <div class="book-detail">
+  <div class="product-detail">
     {% if product.product_cover %}
       <img class="demo" src="{{ product.product_cover.url}}" alt="{{ product.name }}">
     {% endif %}
