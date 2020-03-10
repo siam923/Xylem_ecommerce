@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'pages.apps.PagesConfig',
     'products.apps.ProductsConfig',
     'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 # django-crispy-forms
@@ -161,3 +162,11 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True # new
 
 ACCOUNT_FORMS = {'signup': 'users.forms.MyCustomSignupForm'}
+
+## .env files
+from dotenv import load_dotenv
+load_dotenv(os.path.join(BASE_DIR, '.env'))
+## Stripe
+
+STRIPE_TEST_PUBLISHABLE_KEY=os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY=os.environ.get('STRIPE_TEST_SECRET_KEY')
