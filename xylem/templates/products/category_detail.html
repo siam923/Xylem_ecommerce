@@ -1,0 +1,52 @@
+{% extends '_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ category.name }}{% endblock title %}
+
+{% block content %}
+  <div class='row'>
+    <div class='col-12'>
+      <h2>{{category.name}}</h2>
+
+      <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="{{banners.image.url}}" alt="First slide">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+  <div class='row'>
+    <h3> View all products in this category </h3>
+
+  </div>
+<hr>
+<br>
+
+  <br>
+
+  <div class="row">
+      {% for product in products %}
+      <div class="col-md-4 col-sm-6 col-lg-3 ">
+              <div class="card" style="width:auto; height:460px;" style="margin-top:20px;">
+                <img src="{{ product.product_cover.url }}" style="width:auto; height:250px;" class="card-img-top plist" alt="{{ product.name }}">
+                      <div class="card-body">
+                        <h6 class="card-title"> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+                        <p class="card-text">{{ product.price }}</p>
+                      </div>
+                  <div class='card-footer text-center'>
+                  <p><a href="{% url 'cart' product.slug %}" class="btn btn-success">Add to Cart</a></p>
+                  <p><a href="{% url 'remove-cart' product.slug %}" class="btn btn-success">Remove From Cart</a></p>
+                  </div>
+               </div>
+        </div>
+      {% endfor %}
+    </div>
+
+{% endblock content %}

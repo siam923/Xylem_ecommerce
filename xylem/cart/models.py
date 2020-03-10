@@ -18,7 +18,10 @@ class Cart(models.Model):
 
     # total of each type of item
     def get_total(self):
-        total =  self.item.price * self.quantity
+        if self.item.on_sale:
+            total = self.item.sale_price * self.quantity
+        else:
+            total =  self.item.price * self.quantity
         floattotal = float("{0:.2f}".format(total))
         return floattotal
 
@@ -30,7 +33,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'Order by- {self.user.username}'
+        return f'Order by- {self.user.username} id: {self.pk}'
 
     # order total
     def get_totals(self):

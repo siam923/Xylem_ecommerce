@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
+    'django_filters',
 
     # Local
     'users.apps.UsersConfig',

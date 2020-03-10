@@ -1,26 +1,59 @@
-
 {% extends '_base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block title %}Products{% endblock title %}
 
 {% block content %}
+  {% if query %}
+    <div class='col-12'>
+      Searched for <b>{{ query }}</b>
+      <hr/>
+    </div>
+  {% else %}
+    <div class='col-12'>
+      <h2> All Products</h2>
+      <hr>
+      <br>
+  {% endif %}
+
+  <form method="GET">
+    <div class='form-row'>
+
+      <div class="form-group col-md-3 mb-0">
+          {{filter.form.price__gt|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+          {{filter.form.price__lt|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+          {{filter.form.category|as_crispy_field}}
+      </div>
+      <div class="form-group col-md-3 mb-0">
+          {{filter.form.on_sale|as_crispy_field}}
+      </div>
+    </div>
+
+    <button type="sumit" class="btn btn-primary">Apply Filters</button>
+
+  </form>
+
 
   <div class="row">
-      {% for product in product_list %}
-      <div class="col-md-4 col-sm-6 col-lg-3 m-1">
-              <div class="card" style="width:auto; height:400px;">
-                <img src="{{ product.product_cover.url }}" style="width:auto; height:250px;" class="card-img-top plist" alt="{{ product.name }}">
-                      <div class="card-body">
-                        <h6 class="card-title"> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
-                        <p class="card-text">{{ product.price }}</p>
-                      </div>
-                  <div class='card-footer text-center'>
-                  <p><a href="{% url 'cart' product.slug %}" class="btn btn-success">Add to Cart</a></p>
-                  <p><a href="{% url 'remove-cart' product.slug %}" class="btn btn-success">Remove From Cart</a></p>
-                  </div>
-               </div>
-        </div>
-      {% endfor %}
-</div>
+    {% for product in filter.qs %}
+    <div class="col-md-4 col-sm-6 col-lg-3"style="margin-top:20px;">
+            <div class="card" style="width:auto; height:480px;">
+              <img src="{{ product.product_cover.url }}" style="width:auto; height:250px;" class="card-img-top plist" alt="{{ product.name }}">
+                    <div class="card-body">
+                      <h6 class="card-title"> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
+                      <p class="card-text">{{ product.price }}</p>
+                    </div>
+                <div class='card-footer text-center'>
+                <p><a href="{% url 'cart' product.slug %}" class="btn btn-success">Add to Cart</a></p>
+                <p><a href="{% url 'remove-cart' product.slug %}" class="btn btn-success">Remove From Cart</a></p>
+                </div>
+             </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock content %}
