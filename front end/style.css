@@ -1,0 +1,372 @@
+*
+{
+  margin: 0;
+  padding: 0;
+}
+body
+{
+  font-family: 'Raleway', sans-serif;
+background-color: #f1f3f4;
+}
+.top-nav-bar
+{
+  height: 56px;
+  top: 0;
+  position: sticky ;
+  background: #fff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #2a3177;
+  z-index: 2;
+}
+.logo{
+  height: 40px;
+  margin: 5px 10px;
+}
+.form-control{
+  margin-top: 9px;
+  margin-left: 30px;
+  border: 1px solid #2a3177 !important;
+  border-top-left-radius: 20px !important;
+  border-bottom-left-radius: 20px  !important;
+  border-top-right-radius: 0  !important;
+  border-bottom-right-radius: 0 !important;
+  box-shadow: none !important;
+}
+.input-group-text
+{
+  background: #2a3177;
+  border: 1px solid #2a3177;
+  margin: 8.5px 10px 3px 0;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px  !important;
+  border-top-right-radius: 20px !important;
+  border-bottom-right-radius: 20px !important;
+  cursor: pointer;
+}
+.search-box{
+  display: inline-flex;
+  width: 60%;
+}
+.fa-search{
+  color: #fff;
+}
+.menu-bar{
+  width: 40%;
+  height: 57px;
+  float: right;
+}
+.menu-bar ul{
+  display: inline-flex;
+  float: right;
+}
+
+.menu-bar ul li{
+  border-left: 1px solid #fff;
+  list-style-type: none;
+  padding: 15px 35px;
+  text-align : center;
+  background-color: #2a3177;
+  transition: .5s;
+  cursor: pointer;
+}
+.menu-bar ul li a{
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: none;
+
+}
+.menu-bar ul li:hover {
+  background: #3e48b0;
+  color: white;
+  transform: scale(1.1);
+}
+.input-group-text:hover {
+  background: #191d47;
+  color: white;
+}
+.fa-shopping-cart{
+  margin-right: 5px;
+}
+@media only screen and (max-width: 980px)
+{
+  .top-nav-bar{
+    height: 118px;
+    border-bottom: 0;
+  }
+  .search-box{
+    width: 100%;
+  }
+  .menu-bar{
+    width: 100%;
+  }
+  .menu-bar ul{
+    margin: 10px 0;
+    width: 100%;
+  }
+  .menu-bar ul li{
+    height: 57px;
+    width: 100%;
+  }
+}
+
+/*----------Side-Menu-------------*/
+.side-menu{
+  height: 680px;
+  width: 15%;
+  font-size: 14px;
+  font-weight: 500;
+  float: left;
+  z-index: 2;
+  background-color: #e9eaf1 ;
+}
+.side-menu ul{
+  margin-left: 20px;
+}
+.side-menu ul li{
+  list-style-type: none;
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.side-menu ul li:hover{
+  color: #343fb0;
+}
+.side-menu ul li ul{
+  display: none;
+  z-index: 10;
+  top: 77px;
+}
+.side-menu ul li:hover ul{
+  display: block;
+  height: 400px;
+  margin-left: 14%;
+  padding:  0 100px 10px 10px;
+  position: fixed;
+  background: #ececec;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+}
+.fa-angle-right{
+  font-weight: bold;
+  margin-top: 4px;
+  margin-right: 8px;
+  float: right;
+}
+#menu-btn,#close-btn{
+  font-size: 30px;
+  margin: 10px;
+  color: #2a3177;
+  display: none;
+}
+
+@media only screen and (max-width: 980px)
+{
+  .side-menu{
+    width: 34%;
+    z-index: 20;
+    top: 133px;
+    position: fixed;
+    font-size: 12px;
+    display: none;
+
+  }
+  .side-menu ul li ul{
+    top: 133px;
+  }
+  .side-menu ul li:hover ul{
+    margin-left: 31%;
+  }
+  #menu-btn{
+    display: block;
+  }
+}
+/*-----------------slider css------------------*/
+.slider{
+  width: 85%;
+  height: 680px;
+  margin-left: 15%;
+  padding: 0 10px;
+}
+@media only screen and (max-width: 980px)
+{
+  .slider{
+    width: 100%;
+    margin-left: 0;
+  }
+}
+.featured-categories{
+  margin: 50px 0;
+}
+.featured-categories img{
+  width: 100%;
+  padding: 20px 0;
+  transition: .5s;
+  cursor: pointer;
+}
+.featured-categories img:hover{
+  transform: scale(1.1);
+}
+/*----------------------On sale css--------------*/
+.title-box{
+  background-color: #2a3177;
+  color: #fff;
+  width: 180px;
+  padding: 4px 10px;
+  height: 40px;
+  margin-bottom: 30px;
+  display: flex;
+}
+.title-box h2{
+  font-size: 24px;
+}
+.title-box::after{
+  content: '';
+  border-top: 40px solid #2a3177;
+  border-right: 50px solid transparent;
+  position: absolute;
+  display: flex;
+  margin-top: -4px;
+  margin-left: 170px;
+}
+
+.product-top img{
+  width: 100%;
+}
+.overlay-right{
+  display: block;
+  opacity: 0;
+  position: absolute;
+  top: 10%;
+  margin-left: 0;
+  width: 70px;
+}
+.overlay-right .fa{
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  height: 35px;
+  width: 35px;
+  font-size: 20px;
+  padding: 7px;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+.overlay-right .btn-secondary
+{
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+
+}
+.product-top:hover .overlay-right
+{
+  opacity: 1;
+  margin-left: 5%;
+  transition: 0.5s;
+}
+/*-------------Product-botom-css-------------------*/
+.product-bottom{
+  font-family: 'Actor', sans-serif;
+  padding-top: 5px;
+}
+.product-bottom .fa{
+  color: orange;
+  font-size: 14px;
+}
+.product-bottom h3{
+  font-size: 20px;
+  font-weight: bold;
+}
+.product-bottom h5{
+  font-size: 15px;
+  padding-bottom: 10px;
+}
+.new-products{
+    margin: 50px 0;
+}
+
+
+/*----------website-features-------------------------*/
+.website-features{
+
+  margin: 60px 0;
+}
+.website-features img{
+  width: 20%;
+}
+.feature-text{
+  margin-top: 10px;
+  float: right;
+  width: 80%;
+  padding-left: 20px;
+}
+.feature-box{
+  padding-top: 20px;
+}
+/*------------------footer--------------------------*/
+.footer{
+  font-family: 'Actor', sans-serif;
+  margin-top: 50px;
+  background: #232f3f;
+  color: #fff;
+}
+.footer h1{
+  font-size: 24px;
+  margin: 25px 0;
+}
+.footer p{
+  color: #dbcbcc;
+  font-size: 12px;
+}
+.circle-icon {
+background-color: white;
+border-radius: 50%;
+border: 1x solid grey;
+padding:15px;
+height: 43px;
+width: 43px;
+}
+
+.circle-icon :hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+.copyright{
+  margin-bottom: -80px;
+  text-align: center;
+  font-size: 15px;
+  padding-bottom: 20px;
+}
+.fa-heart-o{
+  color: red;
+  font-size: 15px;
+}
+.footer hr{
+  border-top: 1px solid #dbcbcc;
+margin-top: 30px;
+
+}
+.footer-image img{
+  width: 75%;
+}
+/* theme : #2a3177  Hover : #343fb0*/
