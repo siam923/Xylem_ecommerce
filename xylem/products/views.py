@@ -31,7 +31,7 @@ class ProductDetailView(DetailView):
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     fields = ('name', 'price', 'product_cover',
-                'featured', 'active', 'category',
+                'featured', 'active', 'description', 'category',
                 'on_sale', 'sale_price', 'sku')
     success_url = reverse_lazy('product_list')
     template_name = 'products/product_create.html'

@@ -11,7 +11,12 @@
     <h2><a href="">{{ product.name }}</a></h2>
     <p>Category: {{ product.category }}</p>
     <p>Brand: {{product.vendor.brand}}</p>
-    <p>Price: {{ product.price }}</p>
+    {% if product.on_sale %}
+    <p>Price: <strike>{{product.price}}</strike>  {{ product.sale_price }}</p>
+    {% else %}
+    <p>{{ product }}</p>
+    {% endif %}
+    <p>Description: {{ product.description }}</p>
 
     <p><a href="{% url 'review_create' product.id %}">Drop Review</a></p>
 
