@@ -12,6 +12,7 @@ from .utils import unique_slug_generator
 class Category(models.Model):
     name = models.CharField(max_length=100)
     thumbnail = models.ImageField(upload_to='category/thumbnail', blank=True)
+    parent = models.CharField(max_length=50, default='None')
 
     def __str__(self):
         return self.name
@@ -42,11 +43,13 @@ class Product(models.Model):
         on_delete=models.CASCADE
     ) # my_note: this can be manytomany ->will update later
     product_cover = models.ImageField(upload_to='product_covers/', blank=True)
+    description = models.TextField(verbose_name='Product Description')
     sku = models.PositiveIntegerField(default=5, verbose_name='Stock Keeping Unit')
     on_sale = models.BooleanField(default=False)
     sale_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0)
     slug = models.SlugField(blank=True, unique=True)
     timestamp = models.DateTimeField(auto_now_add=True) #default=datetime.now() init
+
 
     def __str__(self):
         return f"{self.name} by {self.vendor.brand}"

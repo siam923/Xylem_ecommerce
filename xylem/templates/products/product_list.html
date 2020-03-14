@@ -46,7 +46,12 @@
               <img src="{{ product.product_cover.url }}" style="width:auto; height:250px;" class="card-img-top plist" alt="{{ product.name }}">
                     <div class="card-body">
                       <h6 class="card-title"> <a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h6>
-                      <p class="card-text">{{ product.price }}</p>
+                      {% if product.on_sale %}
+                        <p class="card-text"><strike>{{product.price}}</strike>  {{ product.sale_price }}</p>
+                      {% else %}
+                        <p class="card-text">{{product.price}}</p>
+                      {% endif %}
+                    
                     </div>
                 <div class='card-footer text-center'>
                 <p><a href="{% url 'cart' product.slug %}" class="btn btn-success">Add to Cart</a></p>
