@@ -1,0 +1,39 @@
+{% load cart_tag %}
+{% load static %}
+
+<section class="footer">
+    <div class="container text-center">
+    <div class="row">
+      <div class="col-md-3">
+        <h1>Useful links</h1>
+        <p>Privacy policy</p>
+        <p>Term of use</p>
+        {% if user.is_authenticated %}
+        <p><a href="{% url 'vendor_create' %}">Vendor Profile</a></p>
+        <p><a href="{% url 'profile_detail' user.pk %}">Profile Details</a></p>
+        {% endif %}
+      </div>
+      <div class="col-md-3">
+        <h1>Company</h1>
+        <p>About Us</p>
+        <p>Contact Us</p>
+        <p>Career</p>
+        <p>Affiliate</p>
+      </div>
+      <div class="col-md-3 contact-us">
+        <h1>Follow us on</h1>
+        <a href="#" class="fa fa-facebook circle-icon"></a>
+        <a href="#" class="fa fa-twitter circle-icon"></a>
+        <a href="#" class="fa fa-google circle-icon"></a>
+        <a href="#" class="fa fa-linkedin circle-icon"></a>
+
+      </div>
+      <div class="col-md-3 footer-image">
+        <h1>Download App</h1>
+        <img src="{% static 'images/androapp.png' %}" >
+      </div>
+    </div>
+    <hr>
+    <p class="copyright">Made with <i class="fa fa-heart-o"></i> for CSE299 Project</p>
+    </div>
+    </section>

@@ -3,12 +3,17 @@ from .models import Cart, Order
 from products.models import Product
 
 from django.contrib import messages
+from django.utils.decorators import method_decorator
+#from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 #Cart View
+
 def CartView(request):
 
     user = request.user
+    if user.is_anonymous:
+        return redirect('account_login')
 
     carts = Cart.objects.filter(user=user)
     orders = Order.objects.filter(user=user, ordered=False)
@@ -36,17 +41,17 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This item quantity was updated.")
-            return redirect("home")
+            return redirect("cart-home")
         else:
             order.orderitems.add(order_item)
             messages.info(request, "This item was added to your cart.")
-            return redirect("home")
+            return redirect("product_list")
     else:
         order = Order.objects.create(
             user=request.user)
         order.orderitems.add(order_item)
         messages.info(request, "This item was added to your cart.")
-        return redirect("home")
+        return redirect("product_list")
 
 def decreaseCart(request, slug):
     item = get_object_or_404(Product, slug=slug)
@@ -103,10 +108,10 @@ def remove_from_cart(request, slug):
             )[0]
             order.orderitems.remove(order_item)
             messages.info(request, "This item was removed from your cart.")
-            return redirect("home")
+            return redirect("product_list")
         else:
             messages.info(request, "This item was not in your cart")
-            return redirect("home")
+            return redirect("product_list")
     else:
         messages.info(request, "You do not have an active order")
         return redirect("product_list")

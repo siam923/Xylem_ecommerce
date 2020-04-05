@@ -1,0 +1,32 @@
+{% load cart_tag %}
+{% load static %}
+
+<div class="top-nav-bar">
+  <div class="search-box">
+      <i class="fa fa-bars" id="menu-btn" onclick="openmenu()"></i>
+      <i class="fa fa-times" id="close-btn" onclick="closemenu()"></i>
+    <a href="{% url 'home' %}"><img src="{% static 'images/logo2.JPG' %}" class="logo"></a>
+
+
+
+<form class="search-box2" id="my_form" action="{% url 'product_list' %}" method="get">
+  <input name="name" class="form-control my-form"  type="text">
+  <button type="submit" class="input-group-text"><i class="fa fa-search"></i></button>
+</form>
+  </div>
+  <div class="menu-bar">
+    <ul>
+      <li><a class="p-2" href="{% url 'category_list' %}">Departments</a></li>
+      {% if user.is_authenticated %}
+      <li><span class="badge badge-light">Hi {{ user.username}} !</span></li>
+      <li><a href="{% url 'account_logout' %}">Log Out</a></li>
+      <li><a href="{% url 'cart-home' %}"><i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">{{ request.user| cart_total }}</span></a></li>
+      {% else %}
+      <li><a href="{% url 'cart-home' %}"><i class="fa fa-shopping-cart"></i>Cart <span class="badge badge-light">0</span></a></li>
+      <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+      <li><a href="{% url 'account_login' %}">Log In</a></li>
+      {% endif %}
+
+    </ul>
+  </div>
+</div>

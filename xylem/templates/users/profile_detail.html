@@ -3,6 +3,7 @@
 {% block title %}Vendor Profile Creatiion{% endblock title %}
 
 {% block content %}
+<div class="container">
   <h1>My Profie</h1>
   <hr>
   <h2> User Info </h2>
@@ -16,8 +17,9 @@
     <h2> Vendor Information </h2>
     <p>Brand Name: {{brand_name}}</p>
     <p>Brand Info: {{brand_info}}</p>
+    <p><a href="{% url 'product_create' %}">Add New Product</a></p>
     <p><a href="">Edit Vendor Profile</a></p>
   <h2>
   {% endif %}
-
+</div>
 {% endblock content %}

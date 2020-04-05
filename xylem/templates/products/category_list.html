@@ -5,17 +5,18 @@
 {% block title %}Product Categories{% endblock title %}
 
 {% block content %}
-
-  <div class="row">
-      {% for category in category_list %}
-      <div class="col-md-6 col-sm-12 col-lg-4" style="margin-top:20px;">
-        <div class="card" style="18rem;">
-          <a href="{% url 'category_detail' category.id %}"><img src="{{category.thumbnail.url}}" class="card-img-top" style="width:18rem;height:18rem;" alt="..."></a>
-          <div class="card-body">
-            <p class="card-text">{{category.name}}</p>
+<div class="container">
+    <div class="row">
+        {% for category in category_list %}
+        <div class="col-md-6 col-sm-12 col-lg-4" style="margin-top:20px;">
+          <div class="card" style="18rem;">
+            <a href="{% url 'category_detail' category.id %}"><img src="{{category.thumbnail.url}}" class="card-img-top" style="width:18rem;height:18rem;" alt="..."></a>
+            <div class="card-body">
+              <p class="card-text">{{category.name}}</p>
+            </div>
           </div>
         </div>
-      </div>
-      {% endfor %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}

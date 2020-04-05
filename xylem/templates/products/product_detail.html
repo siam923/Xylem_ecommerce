@@ -4,6 +4,7 @@
 {% block title %}{{ product.name }}{% endblock title %}
 
 {% block content %}
+<div class="container">
   <div class="product-detail">
     {% if product.product_cover %}
       <img class="demo" src="{{ product.product_cover.url}}" alt="{{ product.name }}">
@@ -14,7 +15,7 @@
     {% if product.on_sale %}
     <p>Price: <strike>{{product.price}}</strike>  {{ product.sale_price }}</p>
     {% else %}
-    <p>{{ product }}</p>
+    <p>Price: {{ product.price }}</p>
     {% endif %}
     <p>Description: {{ product.description }}</p>
 
@@ -29,5 +30,6 @@
       </ol>
     </div>
 
+  </div>
   </div>
 {% endblock content %}

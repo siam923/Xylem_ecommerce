@@ -3,8 +3,9 @@
 
 
 {% block content %}
+<div class="container">
   <h1>Orders page</h1>
-  <p>Buy for $39.00</p>
+  <p>Buy for ৳{{ order.get_totals| floatformat:2 }}</p>
 
   <form action="{% url 'charge' %}" method="post">
     {% csrf_token %}
@@ -15,4 +16,5 @@
       data-locale="auto">
     </script>
   </form>
+  </div>
 {% endblock content %}
